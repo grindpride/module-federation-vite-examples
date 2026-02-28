@@ -1,0 +1,6 @@
+packages:
+  - 'react'
+  - 'react/*'
+
+catalog:
+  '@module-federation/vite': 'https://pkg.pr.new/@module-federation/vite@425'

@@ -1,0 +1,23 @@
+{
+  "name": "module-federation-vite-examples",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "react": "cd react && pnpm dev",
+    "postinstall": "cd react && pnpm build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gioboa/module-federation-vite-examples.git"
+  },
+  "author": {
+    "name": "Giorgio Boa",
+    "email": "giorgiob.boa@gmail.com",
+    "url": "https://github.com/gioboa"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gioboa/module-federation-vite-examples/issues"
+  },
+  "homepage": "https://github.com/gioboa/module-federation-vite-examples#readme"
+}
