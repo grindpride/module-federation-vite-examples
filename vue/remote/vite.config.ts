@@ -40,10 +40,7 @@ export default defineConfig(async ({ command, mode }) => {
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
-        vue: path.resolve(
-          __dirname,
-          "./node_modules/vue/dist/vue.runtime.esm-bundler.js"
-        ),
+        vue: path.resolve(__dirname, "./node_modules/vue/dist/vue.runtime.esm-bundler.js"),
         pinia: path.resolve(__dirname, "./node_modules/pinia/dist/pinia.mjs"),
         shared: path.resolve(__dirname, "../shared/shared"),
       },

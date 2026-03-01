@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
           console.info("selfEnv", selfEnv);
           writeFileSync(
             "./src/environment.ts",
-            `export default ${JSON.stringify(selfEnv, null, 2)};`,
+            `export default ${JSON.stringify(selfEnv, null, 2)};`
           );
         },
       },

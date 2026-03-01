@@ -6,9 +6,7 @@ const { count } = storeToRefs(store);
 </script>
 
 <template>
-  <button class="counter" @click="store.increment">
-    Host counter: {{ count }}
-  </button>
+  <button class="counter" @click="store.increment">Host counter: {{ count }}</button>
 </template>
 
 <style scoped>
