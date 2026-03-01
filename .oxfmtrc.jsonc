@@ -6,5 +6,5 @@
   "singleQuote": false,
   "tabWidth": 2,
   "endOfLine": "lf",
-  "ignorePatterns": [".env*"],
+  "ignorePatterns": [".env*", "**/.__mf__temp/**"],
 }
