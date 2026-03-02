@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        vite-version: [5, 6, 7, 8.0.0-beta.16, rolldown-vite]
+        framework: [react, vue, svelte]
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
@@ -29,13 +29,6 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Update Vite Version
-        run: |
-          if [ "${{ matrix.vite-version }}" = "rolldown-vite" ]; then
-            pnpm up -r vite@npm:rolldown-vite
-          else
-            pnpm up -r vite@^${{ matrix.vite-version }}
-          fi
 
       - name: Get Playwright version
         id: playwright-version
@@ -56,22 +49,32 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: pnpm exec playwright install-deps
 
-      - name: Run Playwright tests (react:dev)
-        run: pnpm exec playwright test
-        env:
-          PLAYWRIGHT_TEST_COMMAND: pnpm react:dev
+      - name: Test vite 5
+        uses: ./.github/actions/test-vite
+        with:
+          vite-version: "5"
+          framework: ${{ matrix.framework }}
 
-      - name: Run Playwright tests (react:preview)
-        run: pnpm exec playwright test
-        env:
-          PLAYWRIGHT_TEST_COMMAND: pnpm react:preview
+      - name: Test vite 6
+        uses: ./.github/actions/test-vite
+        with:
+          vite-version: "6"
+          framework: ${{ matrix.framework }}
 
-      - name: Run Playwright tests (vue:dev)
-        run: pnpm exec playwright test
-        env:
-          PLAYWRIGHT_TEST_COMMAND: pnpm vue:dev
+      - name: Test vite 7
+        uses: ./.github/actions/test-vite
+        with:
+          vite-version: "7"
+          framework: ${{ matrix.framework }}
 
-      - name: Run Playwright tests (vue:preview)
-        run: pnpm exec playwright test
-        env:
-          PLAYWRIGHT_TEST_COMMAND: pnpm vue:preview
+      - name: Test vite 8 beta
+        uses: ./.github/actions/test-vite
+        with:
+          vite-version: "8.0.0-beta.16"
+          framework: ${{ matrix.framework }}
+
+      - name: Test rolldown-vite
+        uses: ./.github/actions/test-vite
+        with:
+          vite-version: rolldown-vite
+          framework: ${{ matrix.framework }}
