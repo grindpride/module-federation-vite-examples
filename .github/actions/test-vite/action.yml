@@ -27,6 +27,10 @@ runs:
       env:
         PLAYWRIGHT_TEST_COMMAND: pnpm ${{ inputs.framework }}:dev
 
+    - name: Test build
+      shell: bash
+      run: cd ${{ inputs.framework }} && pnpm build
+
     - name: Test preview
       shell: bash
       run: pnpm exec playwright test
