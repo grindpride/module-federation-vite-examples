@@ -3,13 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "run-p vite:dev force-vite-restart",
-    "vite:dev": "vite --port 4173",
+    "dev": "vite --port 4173",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit",
-    "force-vite-restart": "node ../shared/forceViteRestart.js"
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "pinia": "^2.0.28",
