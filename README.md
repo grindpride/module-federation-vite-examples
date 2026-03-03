@@ -13,9 +13,8 @@ A collection of Module Federation examples built with Vite, used to test new [@m
 
 Each example follows a **host/remote** architecture with shared dependencies.
 
-## E2E tests run against 
-- Vite 5
-- Vite 6
+## E2E tests run against
+
 - Vite 7
 - Vite 8
 - rolldown-vite

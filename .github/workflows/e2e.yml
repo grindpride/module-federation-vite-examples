@@ -49,18 +49,6 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: pnpm exec playwright install-deps
 
-      - name: Test vite 5
-        uses: ./.github/actions/test-vite
-        with:
-          vite-version: "5"
-          framework: ${{ matrix.framework }}
-
-      - name: Test vite 6
-        uses: ./.github/actions/test-vite
-        with:
-          vite-version: "6"
-          framework: ${{ matrix.framework }}
-
       - name: Test vite 7
         uses: ./.github/actions/test-vite
         with:
