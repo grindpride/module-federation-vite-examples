@@ -27,3 +27,6 @@ dist-ssr
 @mf-types
 playwright-report/*
 test-results/*
+
+svelte/**/.svelte-kit
+svelte/**/build

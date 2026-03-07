@@ -4,7 +4,7 @@
 
 From this directory execute:
 
-- npm run preview
+- pnpm run preview
 
 Open your browser at http://localhost:5173/ to see the amazing result
 

@@ -1,0 +1,9 @@
+{
+  "name": "svelte",
+  "description": "Module Federation Vite + Svelte is now possible",
+  "scripts": {
+    "dev": "pnpm --filter svelte-* dev",
+    "build": "pnpm --filter svelte-* build",
+    "preview": "pnpm --filter svelte-* preview"
+  }
+}

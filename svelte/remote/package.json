@@ -1,0 +1,33 @@
+{
+  "name": "svelte-remote",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev --port 4174",
+    "build": "vite build",
+    "preview": "npx serve build -l 4174 --cors",
+    "prepare": "svelte-kit sync || echo ''",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+  },
+  "dependencies": {
+    "@module-federation/vite": "^1.12.1",
+    "@sveltejs/adapter-static": "^3.0.10",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^7.0.0",
+    "@sveltejs/kit": "^2.50.2",
+    "@sveltejs/vite-plugin-svelte": "^6.2.4",
+    "@tailwindcss/vite": "^4.1.18",
+    "svelte": "^5.51.0",
+    "svelte-check": "^4.4.2",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@module-federation/dts-plugin": "2.0.1"
+    }
+  }
+}

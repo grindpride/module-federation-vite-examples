@@ -1,4 +1,4 @@
-# React host and remote
+# Svelte host and remote
 
 ## Getting started
 

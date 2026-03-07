@@ -1,6 +1,8 @@
 packages:
   - "react"
   - "react/*"
+  - "svelte"
+  - "svelte/*"
   - "vue"
   - "vue/*"
 
