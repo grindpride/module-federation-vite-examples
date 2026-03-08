@@ -3,8 +3,9 @@ description: Run e2e tests for a specific vite version and framework
 
 inputs:
   vite-version:
-    description: Vite version to test (e.g. "5", "6", "rolldown-vite")
-    required: true
+    description: Vite version to test (e.g. "5", "6", "rolldown-vite"). If empty, skip vite update.
+    required: false
+    default: ""
   framework:
     description: Framework to test (e.g. "react", "vue")
     required: true
@@ -13,6 +14,7 @@ runs:
   using: composite
   steps:
     - name: Update to vite ${{ inputs.vite-version }}
+      if: inputs.vite-version != ''
       shell: bash
       run: |
         if [ "${{ inputs.vite-version }}" = "rolldown-vite" ]; then

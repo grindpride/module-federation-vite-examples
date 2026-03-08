@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        framework: [react, vue, svelte]
+        framework: [react, vue, svelte, nuxt]
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
@@ -50,21 +50,28 @@ jobs:
         run: pnpm exec playwright install-deps
 
       - name: Test vite 7
+        if: matrix.framework != 'nuxt'
         uses: ./.github/actions/test-vite
         with:
           vite-version: "7"
           framework: ${{ matrix.framework }}
 
       - name: Test vite 8 beta
-        if: matrix.framework != 'svelte'
+        if: matrix.framework != 'svelte' && matrix.framework != 'nuxt'
         uses: ./.github/actions/test-vite
         with:
           vite-version: "8.0.0-beta.16"
           framework: ${{ matrix.framework }}
 
       - name: Test rolldown-vite
-        if: matrix.framework != 'svelte'
+        if: matrix.framework != 'svelte' && matrix.framework != 'nuxt'
         uses: ./.github/actions/test-vite
         with:
           vite-version: rolldown-vite
           framework: ${{ matrix.framework }}
+
+      - name: Test nuxt
+        if: matrix.framework == 'nuxt'
+        uses: ./.github/actions/test-vite
+        with:
+          framework: nuxt
