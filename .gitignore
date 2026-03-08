@@ -30,3 +30,6 @@ test-results/*
 
 svelte/**/.svelte-kit
 svelte/**/build
+nuxt/**/.nuxt
+nuxt/**/.output
+nuxt/**/.nitro

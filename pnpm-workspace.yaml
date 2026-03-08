@@ -1,4 +1,6 @@
 packages:
+  - "nuxt"
+  - "nuxt/*"
   - "react"
   - "react/*"
   - "svelte"

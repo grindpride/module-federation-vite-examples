@@ -10,7 +10,7 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "dependencies": {
-    "@module-federation/vite": "^1.12.1",
+    "@module-federation/vite": "catalog:",
     "@sveltejs/adapter-static": "^3.0.10",
     "rxjs": "^7.8.2"
   },

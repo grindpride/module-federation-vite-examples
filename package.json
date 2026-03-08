@@ -4,8 +4,11 @@
   "description": "",
   "scripts": {
     "prepare": "husky install",
-    "fmt": "oxfmt react svelte vue",
-    "fmt.check": "oxfmt --check react svelte vue",
+    "fmt": "oxfmt nuxt react svelte vue",
+    "fmt.check": "oxfmt --check nuxt react svelte vue",
+    "nuxt:build": "pnpm -C nuxt build",
+    "nuxt:dev": "pnpm -C nuxt dev",
+    "nuxt:preview": "pnpm -C nuxt preview",
     "react:build": "pnpm -C react build",
     "react:dev": "pnpm -C react dev",
     "react:preview": "pnpm -C react preview",

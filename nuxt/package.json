@@ -1,0 +1,9 @@
+{
+  "name": "nuxt",
+  "description": "Module Federation Vite + Nuxt is now possible",
+  "scripts": {
+    "dev": "pnpm --filter nuxt-* dev",
+    "build": "pnpm --filter nuxt-* build",
+    "preview": "pnpm --filter nuxt-* preview"
+  }
+}

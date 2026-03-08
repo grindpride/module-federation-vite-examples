@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx oxfmt --check react svelte vue
+npx oxfmt --check nuxt react svelte vue
