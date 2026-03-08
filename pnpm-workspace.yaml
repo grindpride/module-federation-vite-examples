@@ -9,4 +9,4 @@ packages:
   - "vue/*"
 
 catalog:
-  "@module-federation/vite": "1.12.1"
+  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@452"
