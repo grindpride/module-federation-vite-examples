@@ -1,18 +1,65 @@
 import { expect, test } from "@playwright/test";
 
-test("react host app and remote component should load and be visible", async ({
+const isVue = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vue");
+
+const btn = (page: any, name: RegExp) =>
+  page.getByRole("button", { name }).first();
+
+test("host app and remote component should load and counters should work", async ({
   page,
 }) => {
-  // Go to the React Host application
   await page.goto("/");
 
-  // Verify the Host app loaded successfully (with a longer timeout for Vite cold start)
+  // Verify the Host and Remote apps loaded
   await expect(page.getByText("I'm the host app")).toBeVisible({
     timeout: 10000,
   });
-
-  // Verify the Remote app loaded successfully via Module Federation
-  await expect(page.getByText("I'm the remote app")).toBeVisible({
+  await expect(page.getByText("I'm the remote app").first()).toBeVisible({
     timeout: 10000,
   });
+
+  // Verify counters start at 0
+  await expect(btn(page, /Host counter: 0/)).toBeVisible({ timeout: 10000 });
+  await expect(btn(page, /Remote counter: 0/)).toBeVisible({ timeout: 10000 });
+
+  // Click host counter and verify it increments
+  await btn(page, /Host counter: 0/).click();
+  await expect(btn(page, /Host counter: 1/)).toBeVisible();
+
+  if (isVue) {
+    // Vue shares state via Pinia - remote should also be 1
+    await expect(btn(page, /Remote counter: 1/)).toBeVisible();
+  }
+
+  // Click remote counter
+  await btn(page, isVue ? /Remote counter: 1/ : /Remote counter: 0/).click();
+  await expect(
+    btn(page, isVue ? /Remote counter: 2/ : /Remote counter: 1/)
+  ).toBeVisible();
+
+  if (isVue) {
+    // Vue shared state - host should also be 2
+    await expect(btn(page, /Host counter: 2/)).toBeVisible();
+  }
+
+  // Click host counter again
+  await btn(page, isVue ? /Host counter: 2/ : /Host counter: 1/).click();
+  await expect(
+    btn(page, isVue ? /Host counter: 3/ : /Host counter: 2/)
+  ).toBeVisible();
+
+  if (isVue) {
+    // Vue shared state - remote should also be 3
+    await expect(btn(page, /Remote counter: 3/)).toBeVisible();
+  } else {
+    // Independent state - remote should still be 1
+    await expect(btn(page, /Remote counter: 1/)).toBeVisible();
+
+    // Click remote again and verify independent increment
+    await btn(page, /Remote counter: 1/).click();
+    await expect(btn(page, /Remote counter: 2/)).toBeVisible();
+
+    // Host still at 2
+    await expect(btn(page, /Host counter: 2/)).toBeVisible();
+  }
 });
