@@ -1,0 +1,9 @@
+{
+  "name": "vinext",
+  "description": "Module Federation Vite + vinext is now possible",
+  "scripts": {
+    "dev": "pnpm --filter vinext-* dev:vinext",
+    "build": "pnpm --filter vinext-* build:vinext",
+    "preview": "pnpm build && pnpm --filter vinext-* preview:vinext"
+  }
+}

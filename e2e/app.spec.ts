@@ -1,13 +1,12 @@
 import { expect, test } from "@playwright/test";
 
-const isSharedState = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vue") || process.env.PLAYWRIGHT_TEST_COMMAND?.includes("nuxt");
+const isSharedState =
+  process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vue") ||
+  process.env.PLAYWRIGHT_TEST_COMMAND?.includes("nuxt");
 
-const btn = (page: any, name: RegExp) =>
-  page.getByRole("button", { name }).first();
+const btn = (page: any, name: RegExp) => page.getByRole("button", { name }).first();
 
-test("host app and remote component should load and counters should work", async ({
-  page,
-}) => {
+test("host app and remote component should load and counters should work", async ({ page }) => {
   await page.goto("/");
 
   // Verify the Host and Remote apps loaded
@@ -33,9 +32,7 @@ test("host app and remote component should load and counters should work", async
 
   // Click remote counter
   await btn(page, isSharedState ? /Remote counter: 1/ : /Remote counter: 0/).click();
-  await expect(
-    btn(page, isSharedState ? /Remote counter: 2/ : /Remote counter: 1/)
-  ).toBeVisible();
+  await expect(btn(page, isSharedState ? /Remote counter: 2/ : /Remote counter: 1/)).toBeVisible();
 
   if (isSharedState) {
     // Vue/Nuxt shared state - host should also be 2
@@ -44,9 +41,7 @@ test("host app and remote component should load and counters should work", async
 
   // Click host counter again
   await btn(page, isSharedState ? /Host counter: 2/ : /Host counter: 1/).click();
-  await expect(
-    btn(page, isSharedState ? /Host counter: 3/ : /Host counter: 2/)
-  ).toBeVisible();
+  await expect(btn(page, isSharedState ? /Host counter: 3/ : /Host counter: 2/)).toBeVisible();
 
   if (isSharedState) {
     // Vue/Nuxt shared state - remote should also be 3

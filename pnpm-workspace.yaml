@@ -7,8 +7,10 @@ packages:
   - "svelte/*"
   - "tanstack"
   - "tanstack/*"
+  - "vinext"
+  - "vinext/*"
   - "vue"
   - "vue/*"
 
 catalog:
-  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@473"
+  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@474"

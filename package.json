@@ -2,10 +2,24 @@
   "name": "module-federation-vite-examples",
   "version": "0.0.0",
   "description": "",
+  "homepage": "https://github.com/gioboa/module-federation-vite-examples#readme",
+  "bugs": {
+    "url": "https://github.com/gioboa/module-federation-vite-examples/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Giorgio Boa",
+    "email": "giorgiob.boa@gmail.com",
+    "url": "https://github.com/gioboa"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gioboa/module-federation-vite-examples.git"
+  },
   "scripts": {
     "prepare": "husky install",
-    "fmt": "oxfmt nuxt react svelte tanstack vue",
-    "fmt.check": "oxfmt --check nuxt react svelte tanstack vue",
+    "fmt": "oxfmt *",
+    "fmt.check": "oxfmt --check *",
     "nuxt:build": "pnpm -C nuxt build",
     "nuxt:dev": "pnpm -C nuxt dev",
     "nuxt:preview": "pnpm -C nuxt preview",
@@ -18,24 +32,13 @@
     "tanstack:build": "pnpm -C tanstack build",
     "tanstack:dev": "pnpm -C tanstack dev",
     "tanstack:preview": "pnpm -C tanstack preview",
+    "vinext:build": "pnpm -C vinext build",
+    "vinext:dev": "pnpm -C vinext dev",
+    "vinext:preview": "pnpm -C vinext preview",
     "vue:build": "pnpm -C vue build",
     "vue:dev": "pnpm -C vue dev",
     "vue:preview": "pnpm -C vue preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gioboa/module-federation-vite-examples.git"
-  },
-  "author": {
-    "name": "Giorgio Boa",
-    "email": "giorgiob.boa@gmail.com",
-    "url": "https://github.com/gioboa"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gioboa/module-federation-vite-examples/issues"
-  },
-  "homepage": "https://github.com/gioboa/module-federation-vite-examples#readme",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
     "husky": "^9.1.7",
