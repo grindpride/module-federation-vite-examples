@@ -26,6 +26,10 @@ export default defineConfig({
           requiredVersion: dependencies["solid-js"],
           singleton: true,
         },
+        "solid-js/web": {
+          requiredVersion: dependencies["solid-js"],
+          singleton: true,
+        },
       },
     }),
     /*
