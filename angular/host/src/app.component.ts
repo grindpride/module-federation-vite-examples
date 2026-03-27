@@ -60,7 +60,7 @@ export class AppComponent implements AfterViewInit {
   private async loadRemoteComponent() {
     let lastError: unknown;
 
-    for (let attempt = 0; attempt < 4; attempt++) {
+    for (let attempt = 0; attempt < 20; attempt++) {
       try {
         return await import("remote/remote-app");
       } catch (error) {
