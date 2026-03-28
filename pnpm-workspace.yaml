@@ -3,4 +3,4 @@ packages:
   - "{angular,nuxt,react,solid,svelte,tanstack,vinext,vue}/*"
 
 catalog:
-  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@558"
+  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@559"
