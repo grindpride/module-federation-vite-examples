@@ -12,6 +12,7 @@ A collection of Module Federation examples built with Vite, used to test new [@m
 | [Angular](./angular)   | `angular-host`  | `angular-remote`  | Angular                     |
 | [Lit](./lit)           | `lit-host`      | `lit-remote`      | Lit                         |
 | [Nuxt](./nuxt)         | `nuxt-host`     | `nuxt-remote`     | Nuxt 4                      |
+| [Preact](./preact)     | `preact-host`   | `preact-remote`   | Preact 10                   |
 | [React](./react)       | `react-host`    | `react-remote`    | React 19                    |
 | [Solid](./solid)       | `solid-host`    | `solid-remote`    | Solid                       |
 | [Svelte](./svelte)     | `svelte-host`   | `svelte-remote`   | Svelte 5                    |
@@ -37,6 +38,7 @@ pnpm alpine:dev
 pnpm angular:dev
 pnpm lit:dev
 pnpm react:dev
+pnpm preact:dev
 pnpm solid:dev
 pnpm vue:dev
 pnpm svelte:dev
@@ -55,6 +57,9 @@ pnpm exec playwright test
 
 # Run tests for Vue example
 PLAYWRIGHT_TEST_COMMAND="pnpm vue:preview" pnpm exec playwright test
+
+# Run tests for Preact example
+PLAYWRIGHT_TEST_COMMAND="pnpm preact:preview" pnpm exec playwright test
 ```
 
 ## Testing a PR
