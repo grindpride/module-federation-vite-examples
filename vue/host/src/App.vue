@@ -9,8 +9,8 @@ onMounted(async () => {
   formattedPrice.value = formatPrice(1234.56, "EUR");
 });
 
-const RemoteMFE = defineAsyncComponent(
-  // @ts-ignore
+const RemoteMFE = defineAsyncComponent(//
+    // TS2307: Cannot find module remote/remote-app or its corresponding type declarations.
   () => import("remote/remote-app")
 );
 </script>

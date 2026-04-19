@@ -26,7 +26,7 @@ export default defineConfig(async ({ command, mode }) => {
         },
       },
       federation({
-        dts: false,
+        dts: true,
         dev: {
           remoteHmr: true,
         },

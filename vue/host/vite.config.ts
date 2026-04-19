@@ -23,7 +23,7 @@ export default defineConfig(async ({ command }) => ({
   },
   plugins: [
     federation({
-      dts: false,
+      dts: true,
       dev: {
         remoteHmr: true,
       },
