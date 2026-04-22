@@ -23,8 +23,7 @@ export default defineConfig(async ({ command }) => ({
   },
   plugins: [
     federation({
-      dts: true,
-      virtualModuleDir: "__mf__virtual_tmp",
+      dts: false,
       dev: {
         remoteHmr: true,
       },

@@ -26,10 +26,7 @@ export default defineConfig(async ({ command, mode }) => {
         },
       },
       federation({
-        dts: {
-          compilerInstance: "vue-tsc",
-        },
-        virtualModuleDir: "__mf__virtual_tmp",
+        dts: false,
         dev: {
           remoteHmr: true,
         },
@@ -37,7 +34,7 @@ export default defineConfig(async ({ command, mode }) => {
         name: "remote",
         exposes: {
           "./remote-app": "./src/App.vue",
-          // "./format-utils": "./src/utils/format.ts",
+          "./format-utils": "./src/utils/format.ts",
         },
         remotes: {},
       }),
