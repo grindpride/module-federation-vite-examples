@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import path from "path";
 import { defineConfig } from "vite";
+import { dependencies } from "./package.json";
 
 export default defineConfig(async ({ command }) => ({
   server: {
@@ -39,6 +40,16 @@ export default defineConfig(async ({ command }) => ({
       },
       exposes: {},
       filename: "remoteEntry.js",
+      shared: {
+        pinia: {
+          requiredVersion: dependencies.pinia,
+          singleton: true,
+        },
+        vue: {
+          requiredVersion: dependencies.vue,
+          singleton: true,
+        },
+      },
     }),
     vue(),
     vueJsx(),
