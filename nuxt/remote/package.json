@@ -4,9 +4,9 @@
   "scripts": {
     "build": "nuxt build",
     "predev": "nuxt prepare",
-    "dev": "nuxt dev --host 127.0.0.1 --port 4174",
+    "dev": "nuxt dev --port 4174",
     "generate": "nuxt generate",
-    "preview": "nuxt preview --host 127.0.0.1 --port 4174"
+    "preview": "nuxt preview --port 4174"
   },
   "dependencies": {
     "@module-federation/vite": "catalog:",

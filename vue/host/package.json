@@ -2,9 +2,9 @@
   "name": "vue-host",
   "private": true,
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 4173",
+    "dev": "vite --port 4173",
     "build": "run-p type-check build-only",
-    "preview": "vite preview --host 127.0.0.1 --port 4173",
+    "preview": "vite preview --port 4173",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
   },

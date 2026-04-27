@@ -10,7 +10,7 @@ export default defineConfig(async ({ command }) => ({
     fs: {
       allow: [".", "../shared"],
     },
-    proxy: { "/src/remote_assets": "http://127.0.0.1:4174/" },
+    proxy: { "/src/remote_assets": "http://localhost:4174/" },
   },
   resolve: {
     alias: {
@@ -33,7 +33,7 @@ export default defineConfig(async ({ command }) => ({
         remote: {
           type: "module",
           name: "remote",
-          entry: "http://127.0.0.1:4174/remoteEntry.js",
+          entry: "http://localhost:4174/remoteEntry.js",
           entryGlobalName: "remote",
           shareScope: "default",
         },

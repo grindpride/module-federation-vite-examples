@@ -45,7 +45,7 @@ export default defineNuxtConfig({
           remote: {
             type: "module",
             name: "remote",
-            entry: `http://127.0.0.1:4174${remoteBase}/remoteEntry.js`,
+            entry: `http://localhost:4174${remoteBase}/remoteEntry.js`,
             entryGlobalName: "remote",
             shareScope: "default",
           },

@@ -14,7 +14,7 @@ export default defineConfig(async ({ command, mode }) => {
         allow: [".", "../shared"],
       },
     },
-    base: "http://127.0.0.1:4174",
+    base: "http://localhost:4174",
     plugins: [
       {
         name: "generate-enviroment",

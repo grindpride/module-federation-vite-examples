@@ -8,9 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "dev:vinext": "vite dev --host 127.0.0.1 --port 4173",
+    "dev:vinext": "vite dev --port 4173",
     "build:vinext": "vite build",
-    "preview:vinext": "vite preview --host 127.0.0.1 --port 4173"
+    "preview:vinext": "vite preview --port 4173"
   },
   "dependencies": {
     "@module-federation/vite": "catalog:",

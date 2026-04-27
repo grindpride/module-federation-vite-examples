@@ -2,9 +2,9 @@
   "name": "lit-host",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 4173",
+    "dev": "vite --port 4173",
     "build": "tsc && vite build",
-    "preview": "vite preview --host 127.0.0.1 --port 4173"
+    "preview": "vite preview --port 4173"
   },
   "dependencies": {
     "lit": "^3.3.2"

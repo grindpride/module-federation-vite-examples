@@ -2,9 +2,9 @@
   "name": "alpine-remote",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 4174",
+    "dev": "vite --port 4174",
     "build": "tsc && vite build",
-    "preview": "vite preview --host 127.0.0.1 --port 4174"
+    "preview": "vite preview --port 4174"
   },
   "dependencies": {
     "alpinejs": "^3.15.9"
