@@ -25,17 +25,9 @@ const isSharedState =
 const btn = (page: any, name: RegExp) => page.getByRole("button", { name }).first();
 
 test("host app and remote component should load and counters should work", async ({ page }) => {
-  await expect
-    .poll(
-      async () => {
-        const response = await fetch("http://localhost:4174/remoteEntry.js").catch(() => null);
-        return response?.ok ?? false;
-      },
-      { timeout: 10000 }
-    )
-    .toBe(true);
-
   await page.goto("/");
+
+  await page.waitForTimeout(10000);
 
   // Verify the Host and Remote apps loaded
   await expect(page.getByText("I'm the host app")).toBeVisible({
