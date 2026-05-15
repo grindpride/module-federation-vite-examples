@@ -44,7 +44,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile --prefer-offline
 
       - name: Test vite 7
-        if: matrix.framework != 'nuxt' && matrix.framework != 'react' && matrix.framework != 'tanstack' && matrix.framework != 'tanstack-ssr' && matrix.framework != 'vinext'
+        if: ${{ !contains(fromJSON('["nuxt","react","tanstack","tanstack-ssr","vinext"]'), matrix.framework) }}
         uses: ./.github/actions/test-vite
         with:
           vite-version: "7"
