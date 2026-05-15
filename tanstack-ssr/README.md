@@ -1,4 +1,4 @@
-# TanStack Start UI
+# TanStack host and remote
 
 Example UI showing a host page with remote widgets rendered into the same view.
 
