@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useTheme } from "tanstack-ssr-shared";
+import { useTheme } from "tanstack-shared";
 
 function CloudIcon() {
   return (
@@ -49,7 +49,8 @@ export default function Widget() {
       </div>
       <div style={{ marginTop: 10, fontSize: 21 }}>I'm the remote app</div>
       <p style={{ margin: "10px 0 16px", fontSize: 12, color: "#c9cdd3" }}>
-        Theme from host context: <strong>{theme.label}</strong> ({theme.primaryColour})
+        Theme from host context: <strong>{theme.label}</strong> (
+        {theme.primaryColour})
       </p>
       <button
         onClick={() => setCount((c) => c + 1)}

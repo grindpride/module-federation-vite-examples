@@ -1,55 +1,35 @@
 import { federation } from "@module-federation/vite";
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
-import { writeFileSync } from "fs";
-import { defineConfig, loadEnv } from "vite";
-import { dependencies } from "./package.json";
+import { defineConfig } from "vite";
 
-export default defineConfig(({ mode }) => {
-  const selfEnv = loadEnv(mode, process.cwd());
-  return {
-    server: {
-      fs: {
-        allow: [".", "../shared"],
+export default defineConfig({
+  plugins: [
+    federation({
+      dts: false,
+      name: "remote",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./Widget": "./src/components/Widget",
+        "./Counter": "./src/components/Counter",
       },
-    },
-    build: {
-      target: "chrome89",
-    },
-    plugins: [
-      TanStackRouterVite(),
-      {
-        name: "generate-environment",
-        options: function () {
-          console.info("selfEnv", selfEnv);
-          writeFileSync(
-            "./src/environment.ts",
-            `export default ${JSON.stringify(selfEnv, null, 2)};`
-          );
-        },
+      shared: {
+        react: { singleton: true, requiredVersion: "^19.0.0" },
+        "react-dom": { singleton: true, requiredVersion: "^19.0.0" },
+        "tanstack-shared": { singleton: true, requiredVersion: "0.0.0" },
       },
-      federation({
-        dts: true,
-        dev: { disableDynamicRemoteTypeHints: true, remoteHmr: true },
-        filename: "remoteEntry.js",
-        name: "remote",
-        exposes: {
-          "./remote-app": "./src/App.tsx",
-        },
-        remotes: {},
-        shared: {
-          react: {
-            requiredVersion: dependencies.react,
-            singleton: true,
-          },
-          "react/": {},
-          "react-dom": {
-            requiredVersion: dependencies["react-dom"],
-            singleton: true,
-          },
-        },
-      }),
-      react(),
-    ],
-  };
+    }),
+    react(),
+  ],
+  build: {
+    target: "chrome89",
+  },
+  server: {
+    port: 4174,
+    cors: true,
+    origin: "http://localhost:4174",
+  },
+  preview: {
+    port: 4174,
+    cors: true,
+  },
 });

@@ -3,124 +3,12 @@ import { expect, test } from "@playwright/test";
 const isSharedState =
   process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vue") ||
   process.env.PLAYWRIGHT_TEST_COMMAND?.includes("nuxt");
-const isTanStackSsr = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("tanstack-ssr");
-const shouldLogTanStackSsr = Boolean(process.env.CI && isTanStackSsr);
-const diagnosticsByPage = new WeakMap<
-  any,
-  {
-    consoleMessages: string[];
-    pageErrors: string[];
-    failedRequests: string[];
-    failedResponses: string[];
-  }
->();
-
-test.beforeEach(async ({ page }, testInfo) => {
-  const consoleMessages: string[] = [];
-  const pageErrors: string[] = [];
-  const failedRequests: string[] = [];
-  const failedResponses: string[] = [];
-
-  diagnosticsByPage.set(page, {
-    consoleMessages,
-    pageErrors,
-    failedRequests,
-    failedResponses,
-  });
-
-  page.on("console", (message) => {
-    if (message.type() === "error" || shouldLogTanStackSsr) {
-      consoleMessages.push(`[${message.type()}] ${message.text()}`);
-    }
-  });
-
-  page.on("pageerror", (error) => {
-    pageErrors.push(`${error.name}: ${error.message}\n${error.stack}`);
-  });
-
-  page.on("requestfailed", (request) => {
-    failedRequests.push(`${request.method()} ${request.url()} ${request.failure()?.errorText}`);
-  });
-
-  page.on("response", (response) => {
-    if (response.status() >= 400) {
-      failedResponses.push(`${response.status()} ${response.url()}`);
-    }
-  });
-
-  await testInfo.attach("ci-env", {
-    contentType: "application/json",
-    body: JSON.stringify(
-      {
-        ci: process.env.CI,
-        command: process.env.PLAYWRIGHT_TEST_COMMAND,
-        node: process.version,
-        platform: process.platform,
-        arch: process.arch,
-      },
-      null,
-      2
-    ),
-  });
-});
-
-test.afterEach(async ({ page }, testInfo) => {
-  if (testInfo.status === testInfo.expectedStatus) return;
-
-  const screenshotPath = testInfo.outputPath("failure.png");
-  await page
-    .screenshot({ path: screenshotPath, fullPage: true })
-    .then(() =>
-      testInfo.attach("failure-screenshot", {
-        path: screenshotPath,
-        contentType: "image/png",
-      })
-    )
-    .catch((error) => console.log(`Failed to save failure screenshot: ${error}`));
-
-  const diagnostics = diagnosticsByPage.get(page);
-  if (!diagnostics) return;
-
-  const body = JSON.stringify(
-    {
-      url: page.url(),
-      title: await page.title().catch((error) => `title failed: ${error}`),
-      ...diagnostics,
-      mfScripts: await page
-        .locator('script[src*="_virtual_mf"], script[src*="remoteEntry"], script[src*="main-"]')
-        .evaluateAll((nodes) =>
-          nodes.map((node) => ({
-            src: (node as HTMLScriptElement).src,
-            type: (node as HTMLScriptElement).type,
-          }))
-        )
-        .catch((error) => [`script scan failed: ${error}`]),
-      bodyText: await page
-        .locator("body")
-        .innerText()
-        .catch((error) => `body failed: ${error}`),
-      htmlStart: await page
-        .content()
-        .then((html) => html.slice(0, 5000))
-        .catch((error) => `html failed: ${error}`),
-    },
-    null,
-    2
-  );
-
-  console.log(
-    `\n--- tanstack-ssr diagnostics: ${testInfo.title} ---\n${body}\n--- end diagnostics ---`
-  );
-  await testInfo.attach("tanstack-ssr-diagnostics", {
-    contentType: "application/json",
-    body,
-  });
-});
+const isTanStack = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("tanstack");
 
 const btn = (page: any, name: RegExp) => page.getByRole("button", { name }).first();
 
 test.describe("standard examples", () => {
-  test.skip(isTanStackSsr, "tanstack-ssr has SSR-specific coverage");
+  test.skip(isTanStack, "tanstack has SSR-specific coverage");
 
   test("host app and remote component should load and counters should work", async ({ page }) => {
     await page.goto("/");
@@ -178,8 +66,8 @@ test.describe("standard examples", () => {
   });
 });
 
-test.describe("tanstack-ssr", () => {
-  test.skip(!isTanStackSsr, "tanstack-ssr only");
+test.describe("tanstack", () => {
+  test.skip(!isTanStack, "tanstack only");
 
   test("host app and remote components should be server-rendered", async ({ page }) => {
     await page.goto("/");

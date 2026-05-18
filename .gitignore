@@ -33,8 +33,8 @@ svelte/**/build
 nuxt/**/.nuxt
 nuxt/**/.output
 nuxt/**/.nitro
-tanstack-ssr/**/.output
-tanstack-ssr/**/.tanstack
-tanstack-ssr/**/.mf
-tanstack-ssr/**/dist
-tanstack-ssr/**/node_modules/.ssr-cache
+tanstack/**/.output
+tanstack/**/.tanstack
+tanstack/**/.mf
+tanstack/**/dist
+tanstack/**/node_modules/.ssr-cache

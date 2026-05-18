@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const webServerUrl = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("tanstack-ssr")
+const webServerUrl = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("tanstack")
   ? "http://localhost:4174"
   : "http://localhost:4173";
 const reportDir = process.env.PLAYWRIGHT_REPORT_DIR || "playwright-report";

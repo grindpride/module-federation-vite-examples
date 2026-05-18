@@ -1,42 +1,54 @@
 import { federation } from "@module-federation/vite";
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
+import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
-import { dependencies } from "./package.json";
 
-export default defineConfig(() => ({
-  server: { fs: { allow: [".", "../shared"] } },
-  build: {
-    target: "chrome89",
+export default defineConfig({
+  nitro: {
+    // Keep react/react-dom as Node externals in the Nitro SSR bundle so all
+    // server-side code shares the same require() module instance via Node's
+    // CJS module cache. Without this, Nitro bundles React inline and the
+    // remote's react instance diverges, breaking hooks and context.
+    traceDeps: [
+      "react",
+      "react-dom",
+      "@module-federation/runtime",
+      "@module-federation/runtime-core",
+      "@module-federation/sdk",
+    ],
   },
   plugins: [
-    TanStackRouterVite(),
     federation({
-      dts: true,
-      dev: { disableDynamicRemoteTypeHints: true, remoteHmr: true },
+      dts: false,
       name: "host",
+      hostInitInjectLocation: "entry",
       remotes: {
         remote: {
           type: "module",
           name: "remote",
           entry: "http://localhost:4174/remoteEntry.js",
-          entryGlobalName: "remote",
-          shareScope: "default",
         },
       },
-      exposes: {},
-      filename: "remoteEntry.js",
       shared: {
-        react: {
-          requiredVersion: dependencies.react,
-          singleton: true,
-        },
-        "react-dom": {
-          requiredVersion: dependencies["react-dom"],
-          singleton: true,
-        },
+        react: { singleton: true, requiredVersion: "^19.0.0" },
+        "react-dom": { singleton: true, requiredVersion: "^19.0.0" },
+        "tanstack-shared": { singleton: true, requiredVersion: "0.0.0" },
       },
     }),
+    tanstackStart(),
     react(),
+    nitro(),
   ],
-}));
+  ssr: {
+    optimizeDeps: {
+      include: ["react", "react-dom"],
+    },
+  },
+  build: {
+    target: "chrome89",
+  },
+  server: {
+    port: 4173,
+  },
+});

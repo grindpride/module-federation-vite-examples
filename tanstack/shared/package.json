@@ -1,5 +1,5 @@
 {
-  "name": "tanstack-ssr-shared",
+  "name": "tanstack-shared",
   "version": "0.0.0",
   "private": true,
   "main": "./dist/shared.js",

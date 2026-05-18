@@ -12,4 +12,4 @@ await build({
   platform: "neutral",
   external: ["react"],
 });
-console.log("tanstack-ssr-shared built");
+console.log("tanstack-shared built");
