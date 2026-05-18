@@ -40,6 +40,8 @@ export default defineNuxtConfig({
         filename: "remoteEntry.js",
         exposes: {
           "./remote-app": "./app/app.vue",
+          "./Widget": "./app/components/Widget.vue",
+          "./Counter": "./app/components/CounterSsr.vue",
         },
         remotes: {},
         manifest: true,

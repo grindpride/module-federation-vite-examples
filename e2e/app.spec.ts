@@ -1,14 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-const isSharedState =
-  process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vue") ||
-  process.env.PLAYWRIGHT_TEST_COMMAND?.includes("nuxt");
+const isSharedState = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vue");
+const isNuxt = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("nuxt");
 const isTanStack = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("tanstack");
 
 const btn = (page: any, name: RegExp) => page.getByRole("button", { name }).first();
 
 test.describe("standard examples", () => {
-  test.skip(isTanStack, "tanstack has SSR-specific coverage");
+  test.skip(isTanStack || isNuxt, "SSR examples have specific coverage");
 
   test("host app and remote component should load and counters should work", async ({ page }) => {
     await page.goto("/");
@@ -63,6 +62,46 @@ test.describe("standard examples", () => {
       // Host still at 2
       await expect(btn(page, /Host counter: 2/)).toBeVisible();
     }
+  });
+});
+
+test.describe("nuxt", () => {
+  test.skip(!isNuxt, "nuxt only");
+
+  test("host app and remote components should load", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.getByText("I'm the host app")).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText("Host SSR component")).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText("I'm the remote app")).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText("Remote SSR component")).toBeVisible({ timeout: 10000 });
+
+    await expect(btn(page, /Host counter: 0/)).toBeVisible({ timeout: 10000 });
+    await expect(btn(page, /SSR counter: 0/)).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole("button", { name: /Remote counter: 0/ })).toHaveCount(2);
+  });
+
+  test("all counters should be interactive after hydration", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.getByText(/Hydrated/i).first()).toBeVisible({ timeout: 10000 });
+
+    await btn(page, /Host counter: 0/).click();
+    await expect(btn(page, /Host counter: 1/)).toBeVisible();
+
+    await btn(page, /SSR counter: 0/).click();
+    await expect(btn(page, /SSR counter: 1/)).toBeVisible();
+
+    const remoteCounters = page.getByRole("button", { name: /Remote counter: 0/ });
+    await remoteCounters.first().click();
+    await remoteCounters.last().click();
+    await expect(page.getByRole("button", { name: /Remote counter: 1/ })).toHaveCount(2);
+  });
+
+  test("hydration badges should update after client-side hydration", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.getByText(/Hydrated/i)).toHaveCount(2, { timeout: 10000 });
   });
 });
 

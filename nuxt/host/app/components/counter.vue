@@ -11,7 +11,7 @@ const { count } = storeToRefs(store);
 <style scoped>
 .counter {
   border: 0 solid #e2e8f0;
-  margin-top: 10px;
+  margin-top: 24px;
   background-color: rgb(246, 179, 82);
   border-radius: 0.25rem;
   font-weight: 700;
