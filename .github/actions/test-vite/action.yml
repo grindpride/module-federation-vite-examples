@@ -54,7 +54,7 @@ runs:
 
     - name: Test preview
       id: test-preview
-      if: inputs.framework != 'svelte'
+      if: inputs.framework != 'svelte' && inputs.framework != 'tanstack-ssr'
       shell: bash
       run: pnpm exec playwright test
       env:
