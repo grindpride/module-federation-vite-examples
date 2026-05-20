@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTheme } from "tanstack-shared";
 
 function CloudIcon() {
@@ -22,14 +22,7 @@ function CloudIcon() {
 
 export default function Widget() {
   const [count, setCount] = useState(0);
-  const [hydrated, setHydrated] = useState(false);
   const theme = useTheme();
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-
-  if (!hydrated) return null;
 
   return (
     <div
