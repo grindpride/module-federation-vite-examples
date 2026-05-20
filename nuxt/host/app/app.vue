@@ -4,20 +4,12 @@ import HostCard from "./components/HostCard.vue";
 import HostSsrComponent from "./components/HostSsrComponent.vue";
 
 const RemoteWidget = defineAsyncComponent({
-  loader: () =>
-    (import.meta.server
-      ? import("../../remote/app/components/Widget.vue")
-      : import("remote/Widget")
-    ).then((m) => m.default || m),
+  loader: () => import("remote/Widget").then((m) => m.default || m),
   suspensible: true,
 });
 
 const RemoteCounter = defineAsyncComponent({
-  loader: () =>
-    (import.meta.server
-      ? import("../../remote/app/components/CounterSsr.vue")
-      : import("remote/Counter")
-    ).then((m) => m.default || m),
+  loader: () => import("remote/Counter").then((m) => m.default || m),
   suspensible: true,
 });
 </script>
