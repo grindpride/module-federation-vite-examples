@@ -29,6 +29,7 @@ export default defineConfig(async ({ command }) => ({
         remoteHmr: true,
       },
       name: "host",
+      shareStrategy: "loaded-first",
       remotes: {
         remote: {
           type: "module",

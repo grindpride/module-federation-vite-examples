@@ -33,6 +33,7 @@ export default defineConfig(async ({ command, mode }) => {
         },
         filename: "remoteEntry.js",
         name: "remote",
+        shareStrategy: "loaded-first",
         exposes: {
           "./remote-app": "./src/App.vue",
           "./format-utils": "./src/utils/format.ts",
