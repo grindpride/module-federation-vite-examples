@@ -1,6 +1,7 @@
-import { createPinia } from "pinia";
+import { setActivePinia } from "pinia";
 import { createApp } from "vue";
 import App from "./App.vue";
+import { pinia } from "./pinia";
 import { mfImport, mfImportDefault } from "./utils/mfImport";
 
 async function preloadMfRemotes() {
@@ -10,14 +11,14 @@ async function preloadMfRemotes() {
 }
 
 async function initApp() {
-  const pinia = createPinia();
   const app = createApp(App);
+
+  setActivePinia(pinia);
+  app.use(pinia);
 
   await preloadMfRemotes();
 
   const { default: router } = await import("./router");
-
-  app.use(pinia);
   app.use(router);
   await router.isReady();
   app.mount("#app");

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { mfAsyncComponent } from "../utils/mfAsyncComponent";
 import { useExampleStore } from "remoteFeature/stores/exampleStore";
+import { pinia } from "../pinia";
+import { mfAsyncComponent } from "../utils/mfAsyncComponent";
 
 const ExampleWidget = mfAsyncComponent(() => import("remoteFeature/components/ExampleWidget"));
 
-const store = useExampleStore();
+const store = useExampleStore(pinia);
 </script>
 
 <template>

@@ -18,6 +18,10 @@ export default defineConfig(({ command }) => ({
       pinia: path.resolve(__dirname, "./node_modules/pinia/dist/pinia.mjs"),
       shared: path.resolve(__dirname, "../shared/shared.ts"),
     },
+    dedupe: ["pinia", "vue", "vue-router"],
+  },
+  optimizeDeps: {
+    include: ["pinia", "vue", "vue-router"],
   },
   build: {
     target: "chrome89",
@@ -52,14 +56,17 @@ export default defineConfig(({ command }) => ({
         pinia: {
           requiredVersion: dependencies.pinia,
           singleton: true,
+          eager: true,
         },
         vue: {
           requiredVersion: dependencies.vue,
           singleton: true,
+          eager: true,
         },
         "vue-router": {
           requiredVersion: dependencies["vue-router"],
           singleton: true,
+          eager: true,
         },
       },
     }),
