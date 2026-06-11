@@ -1,6 +1,6 @@
 {
   "name": "vue",
-  "description": "Module Federation Vite + Vue3 is now possible",
+  "description": "Vue3 host with nested remotes (repro for module-federation/vite#806)",
   "scripts": {
     "dev": "pnpm --filter vue-* dev",
     "build": "pnpm --filter vue-* build",

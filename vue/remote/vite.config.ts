@@ -32,11 +32,12 @@ export default defineConfig(async ({ command, mode }) => {
           remoteHmr: true,
         },
         filename: "remoteEntry.js",
-        name: "remote",
+        name: "remoteShared",
         shareStrategy: "loaded-first",
         exposes: {
           "./remote-app": "./src/App.vue",
           "./format-utils": "./src/utils/format.ts",
+          "./core/exposedUtils": "./src/core/exposedUtils.ts",
         },
         remotes: {},
         shared: {

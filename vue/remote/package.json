@@ -14,7 +14,7 @@
     "vue": "3.2.45"
   },
   "devDependencies": {
-    "@module-federation/vite": "catalog:",
+    "@module-federation/vite": "1.16.6",
     "@types/node": "18.11.12",
     "@vitejs/plugin-vue": "6.0.0",
     "@vitejs/plugin-vue-jsx": "3.0.0",

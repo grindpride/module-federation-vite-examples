@@ -5,31 +5,27 @@ import path from "path";
 import { defineConfig } from "vite";
 import { dependencies } from "./package.json";
 
-export default defineConfig(({ command }) => ({
+export default defineConfig({
   server: {
     fs: {
       allow: [".", "../shared"],
     },
-    proxy: { "/src/remote_assets": "http://localhost:4174/" },
   },
-  resolve: {
-    alias: {
-      vue: path.resolve(__dirname, "./node_modules/vue/dist/vue.runtime.esm-bundler.js"),
-      pinia: path.resolve(__dirname, "./node_modules/pinia/dist/pinia.mjs"),
-      shared: path.resolve(__dirname, "../shared/shared.ts"),
-    },
-  },
-  build: {
-    target: "chrome89",
-  },
+  base: "http://localhost:4175",
   plugins: [
     federation({
       dts: false,
       dev: {
         remoteHmr: true,
       },
-      name: "host",
-      shareStrategy: command === "serve" ? "version-first" : "loaded-first",
+      filename: "remoteEntry.js",
+      name: "remoteFeature",
+      shareStrategy: "loaded-first",
+      exposes: {
+        "./stores/exampleStore": "./src/stores/exampleStore.ts",
+        "./pages/HomePage": "./src/pages/HomePage.vue",
+        "./components/ExampleWidget": "./src/components/ExampleWidget.vue",
+      },
       remotes: {
         remoteShared: {
           type: "module",
@@ -38,16 +34,7 @@ export default defineConfig(({ command }) => ({
           entryGlobalName: "remoteShared",
           shareScope: "default",
         },
-        remoteFeature: {
-          type: "module",
-          name: "remoteFeature",
-          entry: "http://localhost:4175/remoteEntry.js",
-          entryGlobalName: "remoteFeature",
-          shareScope: "default",
-        },
       },
-      exposes: {},
-      filename: "remoteEntry.js",
       shared: {
         pinia: {
           requiredVersion: dependencies.pinia,
@@ -57,13 +44,20 @@ export default defineConfig(({ command }) => ({
           requiredVersion: dependencies.vue,
           singleton: true,
         },
-        "vue-router": {
-          requiredVersion: dependencies["vue-router"],
-          singleton: true,
-        },
       },
     }),
     vue(),
     vueJsx(),
   ],
-}));
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+      vue: path.resolve(__dirname, "./node_modules/vue/dist/vue.runtime.esm-bundler.js"),
+      pinia: path.resolve(__dirname, "./node_modules/pinia/dist/pinia.mjs"),
+      shared: path.resolve(__dirname, "../shared/shared.ts"),
+    },
+  },
+  build: {
+    target: "chrome89",
+  },
+});

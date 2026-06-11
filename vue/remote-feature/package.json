@@ -1,17 +1,16 @@
 {
-  "name": "vue-host",
+  "name": "vue-remote-feature",
   "private": true,
   "scripts": {
-    "dev": "vite --port 4173",
+    "dev": "vite --port 4175",
     "build": "run-p type-check build-only",
-    "preview": "vite preview --port 4173",
+    "preview": "vite preview --port 4175",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "pinia": "2.0.28",
-    "vue": "3.2.45",
-    "vue-router": "4.6.4"
+    "vue": "3.2.45"
   },
   "devDependencies": {
     "@module-federation/vite": "1.16.6",
