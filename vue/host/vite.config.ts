@@ -10,7 +10,6 @@ export default defineConfig(({ command }) => ({
     fs: {
       allow: [".", "../shared"],
     },
-    proxy: { "/src/remote_assets": "http://localhost:4174/" },
   },
   resolve: {
     alias: {

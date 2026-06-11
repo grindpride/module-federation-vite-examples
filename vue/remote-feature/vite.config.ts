@@ -23,7 +23,9 @@ export default defineConfig({
       shareStrategy: "loaded-first",
       exposes: {
         "./stores/exampleStore": "./src/stores/exampleStore.ts",
+        "./stores/sessionStore": "./src/stores/sessionStore.ts",
         "./pages/HomePage": "./src/pages/HomePage.vue",
+        "./pages/SettingsPage": "./src/pages/SettingsPage.vue",
         "./components/ExampleWidget": "./src/components/ExampleWidget.vue",
       },
       remotes: {

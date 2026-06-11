@@ -1,6 +1,6 @@
 {
   "name": "vue",
-  "description": "Vue3 host with nested remotes (repro for module-federation/vite#806)",
+  "description": "Production-oriented Vue 3 host with nested Module Federation remotes",
   "scripts": {
     "dev": "pnpm --filter vue-* dev",
     "build": "pnpm --filter vue-* build",

@@ -3,6 +3,7 @@ import { state } from "shared";
 import Counter from "./components/Counter.vue";
 import image from "./remote_assets/logo.svg";
 import { formatPrice } from "@/utils/format";
+
 console.log("remote got message:", state.message);
 </script>
 

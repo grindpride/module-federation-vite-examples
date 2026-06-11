@@ -2,13 +2,12 @@
 import { useRemoteCounterStore } from "remoteShared/stores/counter";
 import { pinia } from "../pinia";
 
-/** Same federated store as RemoteCounterButton — shared Pinia singleton. */
 const store = useRemoteCounterStore(pinia);
 </script>
 
 <template>
-  <button class="counter" data-e2e="HOST__COUNTER" type="button" @click="store.increment">
-    Host counter: {{ store.count }}
+  <button class="counter" data-e2e="REMOTE__COUNTER" type="button" @click="store.increment">
+    Remote counter: {{ store.count }}
   </button>
 </template>
 
@@ -20,6 +19,7 @@ const store = useRemoteCounterStore(pinia);
   color: rgb(24, 24, 24);
   cursor: pointer;
   font-weight: 700;
+  margin-top: 10px;
   padding: 0.5rem 1rem;
 }
 </style>

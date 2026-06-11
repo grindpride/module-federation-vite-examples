@@ -36,6 +36,9 @@ export default defineConfig(async ({ command, mode }) => {
         shareStrategy: "loaded-first",
         exposes: {
           "./remote-app": "./src/App.vue",
+          "./remote_assets/logo": "./src/remote_assets/logo.svg",
+          "./components/Counter": "./src/components/Counter.vue",
+          "./stores/counter": "./src/stores/counter.ts",
           "./format-utils": "./src/utils/format.ts",
           "./core/exposedUtils": "./src/core/exposedUtils.ts",
         },

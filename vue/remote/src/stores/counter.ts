@@ -1,23 +1,11 @@
 import { defineStore } from "pinia";
 
-const _useStore = defineStore("store", {
+/** Same id as original vue example (`"store"`) — one counter across host + remote. */
+export const useRemoteCounterStore = defineStore("store", {
   state: () => ({ count: 0 }),
-  getters: {
-    getCount(): number {
-      return this.count;
-    },
-  },
   actions: {
     increment() {
-      this.count++;
+      this.count += 1;
     },
   },
 });
-
-declare global {
-  interface Window {
-    useStore: typeof _useStore;
-  }
-}
-
-export const useStore = window.useStore || _useStore;
